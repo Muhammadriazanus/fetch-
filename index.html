@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" style="width: 18rem;">
+
+    </div>
+        <img id="card" src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+
+    <script>
+        const uicreation = (data) => {
+            const images = document.querySelector("#image")
+            // console.log(images);
+            const cardTitlesOFImages = document.querySelector(".card-title")
+            // console.log(images,">>>>images is here ");
+            const cardTextOFTheImages = document.querySelector(".card-text")
+            const contanier = document.querySelector(".container")
+            console.log(contanier);
+
+            // images.src = data.image
+            // cardTitlesOFImages.textContent = data.title
+            // cardTextOFTheImages.textContent = data.description
+
+            const mappingTheData = data.forEach((item) => {
+                const singleAmountOfData = `<div class="main col-6"><img id="image" src="${item.image}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">${item.title}</h5>
+        <p class="card-text">${item.description.slice(0, 61)}</p>
+        <a href="#" class="btn btn-primary">Click Here!</a>
+    </div>
+    </div>`
+    return singleAmountOfData
+            })
+            contanier.innerHTML = mappingTheData.join(' ')
+            console.log(contanier);
+
+        }
+        const getCountryDara = (num) => {
+            fetch(`https://fakestoreapi.com/products/${num}`)
+                .then(function (res) {
+                    console.log(res, "===> response the of festch");
+                    return res.json()
+
+                }).then(function (data) {
+                    console.log(data);
+                    uicreation(data)
+                })
+
+        }
+        getCountryDara(1)
+
+        const productsAll = () => {
+            fetch(`https://fakestoreapi.com/products`)
+                .then(function (response) {
+                    console.log(response, ">>>>fectch the all product in of web application");
+                    return response.json()
+
+                }).then(function (data) {
+                    console.log(data, ">>>data of all product");
+
+
+                })
+        }
+        productsAll()
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
